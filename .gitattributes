@@ -1,0 +1,6 @@
+# Dejar que Git detecte por sí mismo qué archivos son texto y normalice sus finales de linea
+* text=auto
+
+#Estos siempre con LF, porque se ejecutan dentro de Linux
+*.sh text eol=lf
+
