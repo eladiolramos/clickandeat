@@ -1,0 +1,30 @@
+# 1. Comportamiento por defecto
+# Normaliza automáticamente los saltos de línea en el repositorio (los guarda como LF) 
+# y los adapta al sistema operativo de cada desarrollador al descargar el código.
+* text=auto eol=lf
+
+# 2. Archivos que SIEMPRE deben usar LF (Formato Linux/Unix)
+# Vital para que los contenedores Docker y servidores no rompan al leerlos.
+*.sh text eol=lf
+Dockerfile text eol=lf
+docker-compose*.yml text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.xml text eol=lf
+.env* text eol=lf
+
+# 3. Archivos que SIEMPRE deben usar CRLF (Formato Windows)
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# 4. Archivos binarios
+# Evita que Git intente fusionarlos (merge) o mostrar sus diferencias como texto.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.jar binary
+*.class binary
