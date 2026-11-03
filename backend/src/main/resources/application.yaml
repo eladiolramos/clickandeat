@@ -15,3 +15,16 @@ spring:
       hibernate:
         jdbc:
           time_zone: UTC
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - health
+          - info
+  endpoint:
+    health:
+      show-details: never
+      probes:
+        enabled: true
+
