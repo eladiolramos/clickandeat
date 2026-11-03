@@ -1,3 +1,7 @@
 spring:
   application:
     name: clickandeat
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:127.0.0.1}:${DB_HOST_PORT:5432}/${POSTGRES_DB:clickandeat}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
