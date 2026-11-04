@@ -14,13 +14,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @SpringBootTest
 @Import(TestcontainersConfiguration.class)
 @AutoConfigureMockMvc
-public class ActuatorHealthIT {
+class ActuatorHealthIT {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    void healthEndpointREportsUp() throws Exception{
+    void healthEndpointReportsUp() throws Exception {
         // When: pido el estado de la aplicación
         // Then: responde 200 y el estado global es UP
         mockMvc.perform(get("/actuator/health"))
