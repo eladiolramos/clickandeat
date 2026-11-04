@@ -1,5 +1,7 @@
 # CLICK&EAT
 Aplicación desarrollada para establecimientos del sector de la restauración, más concretamente para el Delivery y el Take Away. Con ella se podrá digitalizar los procesos de gestión del establecimiento, así como el proceso de captura y gestión de pedidos por parte del cliente.
+## ÍNDICE
+1. [Enlaces](#1-enlaces)
 
 ## Stack seleccionado
 
@@ -79,3 +81,6 @@ docker compose start
 
 - Las credenciales de PostgreSQL no cambian tras modificar el .env: PostgreSQL solo lee las credenciales durante la primera inicialización del volumen. Para aplicar nuevos cambios de usuario o contraseña, destruye el volumen con docker compose down -v y vuelve a ejecutar docker compose up -d.
 
+## 1. Enlaces
+
+[README del Backend](backend/README.md): configuración, arranque, tests y decisiones técnicas.

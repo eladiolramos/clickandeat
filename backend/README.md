@@ -18,7 +18,7 @@ Este documento explica **cómo arrancar, configurar y probar** el backend en loc
 8. [Comandos útiles](#8-comandos-útiles)
 9. [Problemas frecuentes](#9-problemas-frecuentes)
 10. [Decisiones técnicas](#10-decisiones-técnicas)
-11. [Enlaces](#11-enlaces-)
+
 
 ---
 
@@ -314,4 +314,3 @@ H2 no se comporta como PostgreSQL. Los tests usan la **misma imagen** que Compos
 
 ## 11. Enlaces 
 
-[README del Backend](backend/README.md): configuración, arranque, tests y decisiones técnicas.
