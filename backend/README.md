@@ -18,6 +18,7 @@ Este documento explica **cómo arrancar, configurar y probar** el backend en loc
 8. [Comandos útiles](#8-comandos-útiles)
 9. [Problemas frecuentes](#9-problemas-frecuentes)
 10. [Decisiones técnicas](#10-decisiones-técnicas)
+11. [Enlaces](#11-enlaces-)
 
 ---
 
@@ -310,3 +311,7 @@ Solo se exponen `health` e `info`; endpoints como `env`, `beans` o `heapdump` re
 
 ### Tests contra PostgreSQL real con Testcontainers
 H2 no se comporta como PostgreSQL. Los tests usan la **misma imagen** que Compose (`postgres:18`, fijada en lugar de `latest`) para probar exactamente lo mismo que se usa en desarrollo. Los tests de integración (`*IT`) se separan con Failsafe para que `./mvnw test` sea rápido y `./mvnw verify` lo ejecute todo.
+
+## 11. Enlaces 
+
+[README del Backend](backend/README.md): configuración, arranque, tests y decisiones técnicas.
