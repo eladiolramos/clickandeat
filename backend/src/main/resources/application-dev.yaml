@@ -1,0 +1,7 @@
+spring:
+  config:
+    import: optional:file:../infra/.env[.properties]
+management:
+  endpoint:
+    health:
+      show-details: always
