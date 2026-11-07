@@ -18,6 +18,7 @@ Este documento explica **cómo arrancar, configurar y probar** el backend en loc
 8. [Comandos útiles](#8-comandos-útiles)
 9. [Problemas frecuentes](#9-problemas-frecuentes)
 10. [Decisiones técnicas](#10-decisiones-técnicas)
+11. [Base de datos y migraciones](#11-base-de-datos-y-migraciones)
 
 
 ---
@@ -312,5 +313,29 @@ Solo se exponen `health` e `info`; endpoints como `env`, `beans` o `heapdump` re
 ### Tests contra PostgreSQL real con Testcontainers
 H2 no se comporta como PostgreSQL. Los tests usan la **misma imagen** que Compose (`postgres:18`, fijada en lugar de `latest`) para probar exactamente lo mismo que se usa en desarrollo. Los tests de integración (`*IT`) se separan con Failsafe para que `./mvnw test` sea rápido y `./mvnw verify` lo ejecute todo.
 
-## 11. Enlaces 
+## 11. Base de datos y migraciones
 
+### Cómo funciona
+- Flyway aplica las migraciones al arrancar, antes de Hibernate.
+- Hibernate solo valida (`ddl-auto: validate`), nunca crea tablas.
+- Ubicación de las migraciones: ...
+- Ubicación del seed y en qué perfil se aplica: ...
+
+### Reglas
+- Nombre de los ficheros: ...
+- Una migración aplicada no se edita nunca: ...
+- Solo en local (antes de llegar a develop): ...  (docker compose down -v)
+- Las migraciones no se ejecutan a mano desde IntelliJ ni desde psql.
+
+### Decisiones de diseño
+- Idioma: código y BD en inglés; documentación y datos en español.
+- Convenciones: snake_case, nombres de restricciones (pk_, uk_, ck_, fk_, idx_).
+- `NUMERIC(10,2)` para el precio, `>= 0` porque hay extras gratis (salsas).
+- Longitudes: category.name 50, product.name 100; description e image_url como TEXT.
+- Nombre de producto único.
+- `ON DELETE RESTRICT`: no se puede borrar una categoría con productos.
+- Columnas de auditoría created_at / updated_at (TIMESTAMPTZ, UTC).
+
+### Consultar la base de datos
+- psql: `docker compose exec ...` (pon el comando que usas, sin credenciales reales)
+- IntelliJ Database: solo para consultar.
