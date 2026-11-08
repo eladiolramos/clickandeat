@@ -1,6 +1,10 @@
 spring:
   config:
     import: optional:file:../infra/.env[.properties]
+  flyway:
+    locations:
+      - classpath:db/migration
+      - classpath:db/seed
 management:
   endpoint:
     health:
