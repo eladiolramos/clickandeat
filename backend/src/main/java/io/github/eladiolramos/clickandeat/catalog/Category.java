@@ -1,6 +1,10 @@
 package io.github.eladiolramos.clickandeat.catalog;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.Instant;
 
 @Entity
 @Table(name = "category")
@@ -12,6 +16,14 @@ public class Category {
 
     @Column(name = "name", nullable = false, length = 50)
     private String name;
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private Instant createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at", nullable = false, updatable = false)
+    private Instant updatedAt;
 
     protected Category() {
     }
