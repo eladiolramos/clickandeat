@@ -1,14 +1,12 @@
 package io.github.eladiolramos.clickandeat.catalog;
 
 import io.github.eladiolramos.clickandeat.TestcontainersConfiguration;
-import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jpa.test.autoconfigure.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.testcontainers.shaded.org.yaml.snakeyaml.constructor.DuplicateKeyException;
 
 import java.util.Optional;
 
@@ -27,11 +25,8 @@ public class CategoryRepositoryIT {
     @Test
     void savesCategoryWithGeneratedIdAndAuditDates() {
 
-        //Arrange
-        Category category = new Category("Complementos");
-
-        //Act
-        Category savedCategory = categoryRepository.saveAndFlush(category);
+        //Arrange and Act
+        Category savedCategory = categoryRepository.saveAndFlush(new Category("Complementos"));
 
         //Assert
         assertThat(savedCategory.getId()).isNotNull();
@@ -48,12 +43,12 @@ public class CategoryRepositoryIT {
         testEntityManager.clear();
 
         //Act
-        Optional<Category> findBebidas = categoryRepository.findByNameIgnoreCase("bebidas");
-        Optional<Category> findNoExiste =  categoryRepository.findByNameIgnoreCase("NoExiste");
+        Optional<Category> findDrinks = categoryRepository.findByNameIgnoreCase("bebidas");
+        Optional<Category> findNotExist = categoryRepository.findByNameIgnoreCase("NoExiste");
 
         //Assert
-        assertThat(findBebidas).isPresent();
-        assertThat(findNoExiste).isEmpty();
+        assertThat(findDrinks).isPresent();
+        assertThat(findNotExist).isEmpty();
     }
 
     @Test
@@ -64,6 +59,6 @@ public class CategoryRepositoryIT {
         categoryRepository.saveAndFlush(new Category("Bebidas"));
 
         //Act and Assert
-        assertThatThrownBy(()->categoryRepository.saveAndFlush(new Category("Bebidas"))).isInstanceOf(DataIntegrityViolationException.class);
+        assertThatThrownBy(() -> categoryRepository.saveAndFlush(new Category("Bebidas"))).isInstanceOf(DataIntegrityViolationException.class);
     }
 }
