@@ -6,27 +6,38 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional(readOnly=true)
+@Transactional(readOnly = true)
 public class CatalogService {
 
     private final CategoryRepository categoryRepository;
     private final ProductRepository productRepository;
+    private final CatalogMapper catalogMapper;
 
-    public CatalogService(CategoryRepository categoryRepository, ProductRepository productRepository) {
+    public CatalogService(CategoryRepository categoryRepository, ProductRepository productRepository, CatalogMapper catalogMapper) {
         this.categoryRepository = categoryRepository;
         this.productRepository = productRepository;
+        this.catalogMapper = catalogMapper;
     }
 
-    public List<Category> getCategories() {
-        return categoryRepository.findAllByOrderByNameAsc();
+    public List<CategoryResponse> getCategories() {
+        return categoryRepository.findAllByOrderByNameAsc()
+                .stream()
+                .map(catalogMapper::toResponse)
+                .toList();
     }
 
-    public List<Product> getAvailableProductsByCategory(Long categoryId) {
-        return productRepository.findAllByCategoryIdAndAvailableTrueOrderByNameAsc(categoryId);
+    public List<ProductResponse> getAvailableProductsByCategory(Long categoryId) {
+        return productRepository.findAllByCategoryIdAndAvailableTrueOrderByNameAsc(categoryId)
+                .stream()
+                .map(catalogMapper::toResponse)
+                .toList();
     }
 
-    public List<Product> getAvailableProducts() {
-        return productRepository.findAllAvailableWithCategory();
+    public List<ProductResponse> getAvailableProducts() {
+        return productRepository.findAllAvailableWithCategory()
+                .stream()
+                .map(catalogMapper::toResponse)
+                .toList();
     }
 
 
